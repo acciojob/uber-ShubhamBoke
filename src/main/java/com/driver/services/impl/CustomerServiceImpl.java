@@ -79,6 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public void cancelTrip(Integer tripId){
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
 		Optional<TripBooking> tripBookingOptional = tripBookingRepository2.findById(tripId);
+		if(!tripBookingOptional.isPresent()) return;
 		TripBooking tripBooking = tripBookingOptional.get();
 
 		Cab cab = tripBooking.getDriver().getCab();
@@ -93,6 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public void completeTrip(Integer tripId){
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
 		Optional<TripBooking> tripBookingOptional = tripBookingRepository2.findById(tripId);
+		if(!tripBookingOptional.isPresent()) return;
 		TripBooking tripBooking = tripBookingOptional.get();
 
 		Cab cab = tripBooking.getDriver().getCab();

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.driver.model.Driver;
 import com.driver.repository.DriverRepository;
 
+import java.util.Optional;
+
 @Service
 public class DriverServiceImpl implements DriverService {
 
@@ -49,7 +51,9 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public void updateStatus(int driverId){
 		//Set the status of respective car to unavailable
-		Driver driver = driverRepository3.findById(driverId).get();
+		Optional<Driver> driverOptional = driverRepository3.findById(driverId);
+		if(!driverOptional.isPresent()) return;
+		Driver driver = driverOptional.get();
 		driver.getCab().setAvailable(false);
 	}
 }
